@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.env
+*.log
+.DS_Store
+.terraform/
+*.tfstate*
+.terraform.lock.hcl
+/tmp/
+*.webp
+*.avif

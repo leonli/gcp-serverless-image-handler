@@ -1,0 +1,14 @@
+# Example Terraform Variables File for GCP Serverless Image Handler
+# Copy this file to terraform.tfvars and customize the values for your project.
+
+project_id       = "helloworld-334009"
+region           = "asia-east1"
+service_name     = "gcp-serverless-image-handler"
+container_image  = "gcr.io/helloworld-334009/gcp-serverless-image-handler:latest"
+source_buckets   = ["image-handler-source-helloworld-334009"]
+enable_signature = "No"
+secret_key_name  = ""
+enable_cdn       = true
+cloud_run_cpu    = "2000m"
+cloud_run_memory = "2048Mi"
+max_concurrency  = 1000
