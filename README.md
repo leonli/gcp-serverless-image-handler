@@ -33,28 +33,28 @@
 ```mermaid
 graph TD
     subgraph Client_Layer ["External Clients & Requests"]
-        Client["Web / Mobile App Users<br/>(Browsers & Mobile SDKs)"]
+        Client["Web / Mobile App Users (Browsers & Mobile SDKs)"]
     end
 
     subgraph Edge_Security_Layer ["Global Edge Caching & WAF Gateway"]
-        CDN["Google Cloud CDN<br/>(Global Multi-Tier Edge Cache)"]
-        GLB["Cloud External App Load Balancer<br/>(Global Anycast IPv4 Gateway)"]
-        Armor["Google Cloud Armor<br/>(WAF / DDoS / 500 req/min Rate Limiting)"]
+        CDN["Google Cloud CDN (Global Multi-Tier Edge Cache)"]
+        GLB["Cloud External App Load Balancer (Global Anycast IPv4 Gateway)"]
+        Armor["Google Cloud Armor (WAF / DDoS / 500 req per min Rate Limiting)"]
     end
 
     subgraph Serverless_Compute_Layer ["GCP Serverless Real-Time Compute"]
-        NEG["Serverless NEG<br/>(Network Endpoint Group)"]
-        Run["Google Cloud Run Container<br/>Node.js 20 + Sharp / libvips Engine"]
+        NEG["Serverless NEG (Network Endpoint Group)"]
+        Run["Google Cloud Run Container (Node.js 20 + Sharp Engine)"]
     end
 
     subgraph Cloud_Backend_Services ["Storage, AI & Secret Backends"]
-        GCS["Google Cloud Storage / GCS<br/>(Source Image Bucket allowlist)"]
-        Secret["Secret Manager<br/>(HMAC Signature Keys)"]
-        Vision["Cloud Vision API<br/>(Face Coordinates & Crop Hints)"]
+        GCS["Google Cloud Storage / GCS (Source Image Bucket allowlist)"]
+        Secret["Secret Manager (HMAC Signature Keys)"]
+        Vision["Cloud Vision API (Face Coordinates & Crop Hints)"]
     end
 
-    Client -->|1. Request Dynamic Transcode/Crop| CDN
-    CDN -->|2. Cache Miss (Stale/New Size)| GLB
+    Client -->|1. Request Dynamic Transcode or Crop| CDN
+    CDN -->|2. Cache Miss Stale or New Size| GLB
     GLB -->|3. Security Policy & WAF Filtering| Armor
     Armor -->|4. Forward Validated Request| NEG
     NEG -->|5. Multi-Concurrency Processing| Run
